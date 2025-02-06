@@ -2,8 +2,12 @@
     "private": true,
     "type": "module",
     "scripts": {
-        "build": "vite build",
-        "dev": "vite"
+        "build": "vue-tsc && vite build && vite build --ssr",
+        "dev": "vite",
+        "lint": "eslint resources --ext .js,.ts,.vue --ignore-path .gitignore --fix",
+        "lint-check": "eslint resources --ext .js,.ts,.vue --ignore-path .gitignore --max-warnings 1",
+        "prettier": "prettier --write resources",
+        "prettier-check": "prettier --check resources"
     },
     "devDependencies": {
         "autoprefixer": "^10.4.20",
@@ -12,11 +16,25 @@
         "laravel-vite-plugin": "^1.2.0",
         "postcss": "^8.4.47",
         "tailwindcss": "^3.4.13",
-        "vite": "^6.0.11"
-    },
-    "dependencies": {
+        "vite": "^6.0.11",
         "@inertiajs/vue3": "^2.0.3",
         "@vitejs/plugin-vue": "^5.2.1",
-        "vue": "^3.5.13"
+        "vue": "^3.5.13",
+        "vue-tsc": "^2.0.24",
+        "prettier": "^3.3.0",
+        "prettier-plugin-organize-imports": "^4.0.0",
+        "prettier-plugin-tailwindcss": "^0.6.5",
+        "sass-embedded": "^1.83.1",
+        "typescript": "~5.5.3",
+        "eslint": "^8.57.0",
+        "eslint-plugin-vue": "^9.23.0",
+        "@tailwindcss/forms": "^0.5.3",
+        "@vue/eslint-config-prettier": "^9.0.0",
+        "@vue/eslint-config-typescript": "^13.0.0",
+        "@vue/server-renderer": "^3.4.0",
+        "@rushstack/eslint-patch": "^1.8.0"
+    },
+    "jshintConfig": {
+        "esversion": 11
     }
 }
