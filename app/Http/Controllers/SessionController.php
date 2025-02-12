@@ -13,5 +13,4 @@ class SessionController extends Controller
             'last_login_at' => $request->user()->last_login_at,
         ]);
     }
-
 }

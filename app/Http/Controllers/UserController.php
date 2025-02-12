@@ -2,13 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
-
     public function login()
     {
         $validate = request()->validate([
@@ -19,18 +17,11 @@ class UserController extends Controller
         $user = User::where('login_name', $validate['login_name'])->first();
         if ($user && Hash::check($validate['password'], $user->hash_password)) {
             return response()->json(['message' => 'Login successful'], 200);
-        }
-        else{
+        } else {
             return response()->json(['message' => 'Login failed'], 401);
         }
 
-
-
-
-
     }
-
-
 
     public function register()
     {
@@ -40,7 +31,6 @@ class UserController extends Controller
             'email' => 'required|string|email|unique:users|max:255',
             'password' => 'required|string|confirmed|min:6|max:32',
         ]);
-
 
         User::create([
             'display_name' => $validate['display_name'],

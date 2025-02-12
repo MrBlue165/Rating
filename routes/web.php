@@ -1,10 +1,9 @@
 <?php
 
 use App\Http\Controllers\SessionController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
-use App\Http\Controllers\UserController;
-
 
 Route::get('/home', function () {
     return Inertia::render('Home', [
