@@ -1,9 +1,6 @@
 ﻿<script setup lang="ts">
 import { ref } from 'vue';
-const props = defineProps<{
-
-
-}>();
+const props = defineProps<{}>();
 const display_name = ref('');
 const login_name = ref('');
 const email = ref('');
@@ -11,14 +8,13 @@ const password = ref('');
 const confirm_password = ref('');
 const error_message = ref('');
 
-const handleSubmit = async() => {
-    if(password.value !== confirm_password.value)
-    {
+const handleSubmit = async () => {
+    if (password.value !== confirm_password.value) {
         error_message.value = "Passwords Don't Match";
         return;
     }
 
-    try{
+    try {
         const response = await fetch('/register', {
             method: 'POST',
             headers: {
@@ -38,16 +34,11 @@ const handleSubmit = async() => {
         }
         error_message.value = '';
         alert('Registration successful');
-
+    } catch (error) {
+        error_message.value =
+            'There has been some problem with your registration, please try again later!';
     }
-    catch (error)
-    {
-        error_message.value = 'There has been some problem with your registration, please try again later!';
-    }
-
-}
-
-
+};
 </script>
 
 <template>
@@ -58,40 +49,66 @@ const handleSubmit = async() => {
                 <div class="reg-wrapper">
                     <label for="display_name">Display name</label>
                     <div class="input-wrapper">
-                        <input type="text" id="display_name" v-model="display_name" required>
+                        <input
+                            type="text"
+                            id="display_name"
+                            v-model="display_name"
+                            required
+                        />
                     </div>
                 </div>
                 <div class="reg-wrapper">
                     <label for="login_name">Login name</label>
                     <div class="input-wrapper">
-                    <input type="text" id="login_name" v-model="login_name" required>
+                        <input
+                            type="text"
+                            id="login_name"
+                            v-model="login_name"
+                            required
+                        />
                     </div>
                 </div>
                 <div class="reg-wrapper">
                     <label for="email">E-Mail</label>
                     <div class="input-wrapper">
-                    <input type="email" id="email" v-model="email" required>
+                        <input
+                            type="email"
+                            id="email"
+                            v-model="email"
+                            required
+                        />
                     </div>
                 </div>
                 <div class="reg-wrapper">
                     <label for="password">Password</label>
                     <div class="input-wrapper">
-                    <input type="password" id="password" v-model="password" required>
+                        <input
+                            type="password"
+                            id="password"
+                            v-model="password"
+                            required
+                        />
                     </div>
                 </div>
                 <div class="reg-wrapper">
                     <label for="confirmPassword">Confirm Password</label>
                     <div class="input-wrapper">
-                    <input type="password" id="confirmPassword" v-model="confirm_password" required>
+                        <input
+                            type="password"
+                            id="confirmPassword"
+                            v-model="confirm_password"
+                            required
+                        />
                     </div>
                 </div>
-                <div v-if="error_message" class="error-message">{{error_message}}</div>
+                <div v-if="error_message" class="error-message">
+                    {{ error_message }}
+                </div>
                 <button type="submit">Register</button>
             </form>
         </div>
     </div>
 </template>
-
 
 <style scoped lang="sass">
 .background-wrapper

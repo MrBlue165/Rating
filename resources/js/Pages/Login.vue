@@ -1,26 +1,21 @@
 ﻿<script setup lang="ts">
 import { ref } from 'vue';
-const props = defineProps<{
-
-
-}>();
-
+const props = defineProps<{}>();
 
 const login_name = ref('');
 const password = ref('');
 const confirm_password = ref('');
 const error_message = ref('');
 
-
-const handleSubmit = async() => {
-    if(password.value !== confirm_password.value)
-    {
-        error_message.value = "Incorrect password";
-        if(login_name.value !== login_name.value) error_message.value = "Invalid login name";
+const handleSubmit = async () => {
+    if (password.value !== confirm_password.value) {
+        error_message.value = 'Incorrect password';
+        if (login_name.value !== login_name.value)
+            error_message.value = 'Invalid login name';
         return;
     }
 
-    try{
+    try {
         const response = await fetch('/login', {
             method: 'POST',
             headers: {
@@ -31,22 +26,15 @@ const handleSubmit = async() => {
                 password: password.value,
             }),
         });
-        if(!response.ok)
-        {
+        if (!response.ok) {
             const result = await response.json();
-            error_message.value = result.message||'Login failed';
+            error_message.value = result.message || 'Login failed';
         }
-
-
+    } catch (error) {
+        error_message.value =
+            'We had some problems logging you in, please try again later!';
     }
-    catch (error)
-    {
-        error_message.value = 'We had some problems logging you in, please try again later!';
-    }
-
-}
-
-
+};
 </script>
 
 <template>
@@ -57,23 +45,33 @@ const handleSubmit = async() => {
                 <div class="log-wrapper">
                     <label for="login_name">Username or Email</label>
                     <div class="input-wrapper">
-                    <input type="text" id="login_name" v-model="login_name" required>
+                        <input
+                            type="text"
+                            id="login_name"
+                            v-model="login_name"
+                            required
+                        />
                     </div>
                 </div>
                 <div class="log-wrapper">
                     <label for="password">Password</label>
                     <div class="input-wrapper">
-                    <input type="password" id="password" v-model="password" required>
+                        <input
+                            type="password"
+                            id="password"
+                            v-model="password"
+                            required
+                        />
                     </div>
                 </div>
-                <div v-if="error_message" class="error-message">{{error_message}}</div>
+                <div v-if="error_message" class="error-message">
+                    {{ error_message }}
+                </div>
                 <button type="submit">Login</button>
-
             </form>
         </div>
     </div>
 </template>
-
 
 <style scoped lang="sass">
 .background-wrapper
