@@ -5,7 +5,7 @@ const props = defineProps<{
 </script>
 
 <template>
-    <h1 class="underline">HOME - {{ props.title }}</h1>
+    <h1>{{ props.title }}</h1>
 </template>
 
 <style scoped lang="sass">
