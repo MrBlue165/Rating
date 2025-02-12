@@ -1,6 +1,5 @@
 ﻿<script setup lang="ts">
 import { ref } from 'vue';
-const props = defineProps<{}>();
 
 const login_name = ref('');
 const password = ref('');
